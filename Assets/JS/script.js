@@ -1,3 +1,5 @@
+var startGame = document.getElementById("start");
+
 const options = {
 	method: 'GET',
 	headers: {
@@ -6,19 +8,41 @@ const options = {
 	}
 };
 
-fetch('https://spotify23.p.rapidapi.com/playlist/?id=6UeSakyzhiEt4NB3UAd6NQ', options)
+// popular
+var getPopularMusic = function() {
+fetch('https://spotify23.p.rapidapi.com/search/?q=popular&type=tracks&offset=0&limit=10&numberOfTopResults=5', options)
+    .then(response => response.json())
+    .then(response => {
+		console.log(response.tracks.items)
+		var randomTrack = random_item(response.tracks.items);
+		var trackId = randomTrack.data.id;
+		console.log(trackId);
+		console.log(randomTrack);
+		getMusicById(trackId);
+	})
+    .catch(err => console.error(err));
+}
+
+var getMusicById = function(id) {
+	fetch(`https://spotify23.p.rapidapi.com/tracks/?ids=${id}`, options)
 	.then(response => response.json())
 	.then(response => console.log(response))
 	.catch(err => console.error(err));
 
-fetch('https://spotify23.p.rapidapi.com/track_lyrics/?id=1brwdYwjltrJo7WHpIvbYt', options)
-	.then(response => response.json())
-	.then(response => console.log(response))
-	.catch(err => console.error(err));
+}
 
-    console.log("This works")
+// lyrics
+// fetch("http://tracking.musixmatch.com/t1.0/9eda005f974163fe27ab679c3e2d7074", options)
+// 	.then(response => response.json())
+// 	.then(response => console.log(response))
+// 	.catch(err => console.error(err));
 
-fetch("http://tracking.musixmatch.com/t1.0/	9eda005f974163fe27ab679c3e2d7074", options)
-.then(response => response.json())
-.then(response => console.log(response))
-.catch(err => console.error(err));
+function random_item(items) {
+  return items[Math.floor(Math.random()*items.length)];  
+}
+
+// allows for multiple actions to happen on one click
+startGame.addEventListener("click", ()=>{
+	console.log("this button works")
+	getPopularMusic();
+})
