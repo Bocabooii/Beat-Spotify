@@ -18,3 +18,20 @@ body {
     border-radius: 5px;
     padding: 8px;
 }
+
+#gameTitle, p {
+    color: rgb(30 215 96);
+}
+
+#startGamebtn {
+    background-color:rgb(30 215 96);
+    border-radius: 20px;
+    height: auto;
+    width: auto;
+}
+
+.difficulty {
+    background-color: rgb(30 215 96);
+    border-radius: 14px;
+
+}

@@ -9,39 +9,51 @@
     <link rel="stylesheet" href="./Assets/CSS/style.css">
 </head>
 
-<body>
+<body class="has-background-grey-dark">
     <!-- Heading for two links: github/highscores -->
     <header id="github">GitHub Link</header>
     <header id="scores">View Highscores</header>
 
     <!-- start screen info -->
     <section id="start-screen" class="container is-max-desktop">
-    <div class="notification is-primary">
+    <div class="notification is-primary has-background-grey-dark">
         <!-- title and rules -->
-        <h1 class="level-item has-text-centered">Beat Spotify</h1>
-            <div class="columns">
+        <h1 id="gameTitle" class="level-item has-text-centered title is-1">Beat Spotify</h1>
+            <div id="firstScreen" class="columns">
                 <ul class="level-item has-text-centered column">Rules
-                    <li class="column">Rule 1</li>
-                    <li class="column">Rule 2</li>
-                    <li class="column">Rule 3</li>
+                    <li class="column">Rule 1<br><p>There will be a phrase from a random top 100 song lyric. Guess the artist who sang that lyric!</p></li>
+                    <li class="column">Rule 2<br><p>There will be photos of artist displayed when and ONLY one is correct, if you have trouble click a hint</p></li>
+                    <li class="column">Rule 3<br><p>If you reach a complete score of 10/10, you complete the level!</p></li>
                 </ul>
             </div>
 
             <!-- buttons for difficulty -->
             <div class="columns is-centered">
                 <div class="column is-3">
-                    <button id="easy">Easy</button>
-                    <button id="medium">Medium</button>
-                    <button id="hard">Hard</button>
+                    <button id="easy" class="difficulty">Easy</button>
+                    <button id="medium" class="difficulty">Medium</button>
+                    <button id="hard" class="difficulty">Hard</button>
                 </div>
             </div>
 
         <!-- start game button -->
-        <div class="columns is-centered">
-            <button id="start" class="column is-one-quarter">Start Game</button>
+        <div id="startGame" class="columns is-centered">
+            <button id="startGamebtn" class="column is-one-quarter has-text-weight-bold is-size-4">Start Game</button>
         </div>
 
     </section>
-
+    <section id="easyQuiz">
+        <div id="artistPhoto">
+            <button id="artist1" style="display: none;"><img src="./Assets/test.photo.jpg"></button>
+            <button><img src="" id="artist2"></button>
+        </div>
+        <div id="randomLyric">
+            <p id="lyric"></p>
+        </div>
+        <div id="response">
+            <p id="responseMessage"></p>
+        </div>
+    </section>
+    <script src="./Assets/JS/script.js"></script>
 </body>
 </html>
