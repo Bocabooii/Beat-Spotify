@@ -6,9 +6,19 @@ const options = {
 	}
 };
 
+fetch('https://spotify23.p.rapidapi.com/playlist/?id=6UeSakyzhiEt4NB3UAd6NQ', options)
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => console.error(err));
+
 fetch('https://spotify23.p.rapidapi.com/track_lyrics/?id=1brwdYwjltrJo7WHpIvbYt', options)
 	.then(response => response.json())
 	.then(response => console.log(response))
 	.catch(err => console.error(err));
 
     console.log("This works")
+
+fetch("http://tracking.musixmatch.com/t1.0/	9eda005f974163fe27ab679c3e2d7074", options)
+.then(response => response.json())
+.then(response => console.log(response))
+.catch(err => console.error(err));
