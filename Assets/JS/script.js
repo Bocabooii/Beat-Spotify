@@ -1,4 +1,4 @@
-var startGame = document.getElementById("start");
+var startGame = document.getElementById("startGamebtn");
 
 const options = {
 	method: 'GET',
