@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 
 const options = {
 	method: 'GET',
@@ -14,5 +13,3 @@ fetch('https://spotify23.p.rapidapi.com/track_lyrics/?id=1brwdYwjltrJo7WHpIvbYt'
 	.catch(err => console.error(err));
 
     console.log("This works")
-=======
->>>>>>> Stashed changes
