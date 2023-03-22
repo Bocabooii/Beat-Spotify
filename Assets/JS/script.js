@@ -1,4 +1,5 @@
 var startGame = document.getElementById("startGamebtn");
+var artistOne = document.getElementById("artistOne")
 
 const options = {
 	method: 'GET',
@@ -49,5 +50,11 @@ startGame.addEventListener("click", ()=>{
 
 fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6NQ&offset=0&limit=10', options)
 	.then(response => response.json())
-	.then(response => console.log(response.items[0].track.album.images[0].url))
+	.then(response => {
+		console.log(response.items[0].track.album.images[0].url)
+		var albumImg = response.items[1].track.album.images[0].url
+		artistOne.innerHTML = "<img src=" + albumImg + ">"
+		var randomAlbumImg = random_item(response.items.track.album.images[0].url);
+		console.log(randomAlbumImg)
+	})
 	.catch(err => console.error(err));
