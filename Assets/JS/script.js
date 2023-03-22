@@ -46,3 +46,8 @@ startGame.addEventListener("click", ()=>{
 	console.log("this button works")
 	getPopularMusic();
 })
+
+fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6NQ&offset=0&limit=10', options)
+	.then(response => response.json())
+	.then(response => console.log(response.items[0].track.album.images[0].url))
+	.catch(err => console.error(err));
