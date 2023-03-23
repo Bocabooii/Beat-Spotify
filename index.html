@@ -29,10 +29,10 @@
 
             <!-- buttons for difficulty -->
             <div class="columns is-centered">
-                <div class="column is-3">
+                <div class="column is-2">
                     <button id="difficulty"><a id="difficulty" href="easymode.html" class="button">Easy</a></button>
-                    <button id="difficulty">Medium</button>
-                    <button id="difficulty">Hard</button>
+                    <button id="difficulty" class="hide">Medium</button>
+                    <button id="difficulty" class="hide">Hard</button>
                 </div>
             </div>
 
@@ -43,12 +43,12 @@
 
     </section>
 
-    <section id="easyQuiz">
+    <section id="easyQuiz" class="hide">
         <div id="artistPhoto">
             <button id="artistOne"></button>
         </div>
-        <div id="randomLyric">
-            <p><span id="lyricText"></span></p>
+        <div id="randomLyric" class="container is-max-desktop has-text-centered">
+            <p class="notification is-success"><span id="lyricText"></span></p>
         </div>
         <div id="response">
             <p id="responseMessage"></p>
