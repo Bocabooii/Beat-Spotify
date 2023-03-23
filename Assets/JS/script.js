@@ -1,5 +1,7 @@
 var startGame = document.getElementById("startGamebtn");
-var artistOne = document.getElementById("artistOne")
+var artistOne = document.getElementById("artistOne");
+var startScreen = document.getElementById("start-screen");
+var easyQuiz = document.getElementById("easyQuiz");
 
 const options = {
 	method: 'GET',
@@ -30,7 +32,6 @@ fetch('https://spotify23.p.rapidapi.com/search/?q=popular&type=tracks&offset=0&l
 // 	.then(response => response.json())
 // 	.then(response => console.log(response))
 // 	.catch(err => console.error(err));
-
 // }
 
 // random items function
@@ -41,10 +42,14 @@ function random_item(items) {
 // allows for multiple actions to happen on one click
 startGame.addEventListener("click", ()=>{
 	console.log("start button works")
-	getPopularMusic();
+	// getPopularMusic();
+	getSongItems();
+	startScreen.setAttribute("class","hide");
+	easyQuiz.removeAttribute("class","hide");
 })
 
 // gets billboard top 100 playlist
+var getSongItems = function () {
 fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6NQ&offset=0&limit=10', options)
 	.then(response => response.json())
 	.then(response => {
@@ -65,6 +70,7 @@ fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6
 	})
 
 	.catch(err => console.error(err));
+}
 
 // setting api key and options for lyrics
 const optionsGenius = {
