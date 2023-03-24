@@ -48,30 +48,6 @@ startGame.addEventListener("click", ()=>{
 	easyQuiz.removeAttribute("class","hide");
 })
 
-// gets billboard top 100 playlist
-var getSongItems = function () {
-fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6NQ&offset=0&limit=10', options)
-	.then(response => response.json())
-	.then(response => {
-		console.log(response.items) // logs all 10 songs fetched
-		var trackName = response.items[0].track.name
-		console.log(trackName)
-
-		var artistName = response.items[0].track.artists[0].name
-		console.log(artistName)
-
-		// console.log(response.items[0].track.album.images[0].url) // logs the img url for the first song
-		var albumImg = response.items[0].track.album.images[0].url
-		artistOne.innerHTML = "<img src=" + albumImg + ">" // adds the img url to html formatting and displayed in page
-
-		// TODO: get 10 albums to display, use for loop to add each album img to page
-		// var randomAlbumImg = random_item(response.items.track.album.images[0].url); 
-		// console.log(randomAlbumImg)
-	})
-
-	.catch(err => console.error(err));
-}
-
 // setting api key and options for lyrics
 const optionsGenius = {
 	method: 'GET',
@@ -81,14 +57,50 @@ const optionsGenius = {
 	}
 };
 
-// use to get the song ID from genius
-// fetch(`https://genius-song-lyrics1.p.rapidapi.com/search/?q=${trackName + artistName}&per_page=1&page=1`, optionsGenius)
-// 	.then(response => response.json())
-// 	.then(response => console.log(response))
-// 	.catch(err => console.error(err));
+// gets billboard top 100 playlist
+var getSongItems = function () {
+fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6NQ&offset=0&limit=10', options)
+	.then(response => response.json())
+	.then(response => {
+		console.log(response.items) // logs all 10 songs fetched
+		
+		var trackName = response.items[0].track.name
+		console.log(trackName)
+
+		var artistName = response.items[0].track.artists[0].name
+		console.log(artistName)
+
+		// var trackIdSpotify = response.items[0].track.album.id
+		// console.log(trackIdSpotify)
+
+		// console.log(response.items[0].track.album.images[0].url) // logs the img url for the first song
+		var albumImg = response.items[0].track.album.images[0].url
+		artistOne.innerHTML = "<img src=" + albumImg + ">" // adds the img url to html formatting and displayed in page
+
+		// use to get the song ID from genius
+		fetch(`https://genius-song-lyrics1.p.rapidapi.com/search/?q=${trackName + artistName}&per_page=1&page=1`, optionsGenius)
+			.then(response => response.json())
+			.then(response => {
+				console.log(response)
+				console.log(response.hits[0].result.id)
+				getLyrics(response.hits[0].result.id)
+			})
+			.catch(err => console.error(err));
+
+		// getting other album images for choices
+		var randomItem = random_item(response.items)
+		var randomOption = randomItem.track.album.images[0].url
+		console.log(randomOption)
+		randomChoice.innerHTML = "<img src="+randomOption+">"
+
+	})
+
+	.catch(err => console.error(err));
+}
 
 // use to get the lyrics from genius
-fetch('https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=8821223&text_format=plain', optionsGenius)
+var getLyrics = function (id) {
+fetch(`https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=${id}&text_format=plain`, optionsGenius)
 	.then(response => response.json())
 	.then(response => {
 	var plainLyric =	response.lyrics.lyrics.body.plain // converts lyrics into plain text
@@ -98,3 +110,4 @@ fetch('https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=8821223&text_f
 	})
 
 	.catch(err => console.error(err));
+}

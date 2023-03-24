@@ -70,6 +70,10 @@ body{
   max-width: 200px;
 }
 
+#randomChoice {
+  max-width: 200px;
+}
+
 .hide {
   display: none;
 }
