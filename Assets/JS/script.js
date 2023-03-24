@@ -1,9 +1,13 @@
 var startGame = document.getElementById("startGamebtn");
 var artistOne = document.getElementById("artistOne");
+var randomChoice = document.getElementById("randomChoice");
 var startScreen = document.getElementById("start-screen");
 var easyQuiz = document.getElementById("easyQuiz");
+var responseCorrect = document.getElementById("responseCorrect");
+var responseInorrect = document.getElementById("responseIncorrect");
 var dataSet = [];
 var checkAnswer = "";
+
 const options = {
 	method: 'GET',
 	headers: {
@@ -139,3 +143,19 @@ fetch(`https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=${id}&text_for
 
 	.catch(err => console.error(err));
 }
+
+artistOne.addEventListener("click", ()=>{
+	console.log("artist one was clicked")
+	responseCorrect.removeAttribute("class","hide");
+	setTimeout(function(){
+		responseCorrect.setAttribute("class","hide");
+	},3000)
+})
+
+randomChoice.addEventListener("click", ()=>{
+	console.log("random choice was clicked")
+	responseIncorrect.removeAttribute("class","hide")
+	setTimeout(function(){
+		responseIncorrect.setAttribute("class","hide");
+	},3000)
+})
