@@ -1,12 +1,15 @@
 var startGame = document.getElementById("startGamebtn");
 var artistOne = document.getElementById("artistOne");
+var randomChoice = document.getElementById("randomChoice");
 var startScreen = document.getElementById("start-screen");
 var easyQuiz = document.getElementById("easyQuiz");
+var responseCorrect = document.getElementById("responseCorrect");
+var responseInorrect = document.getElementById("responseIncorrect");
 
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '2d1ed2a192msh98939cb7c479eaap1118bajsn8c8e3a534674',
+		'X-RapidAPI-Key': '3260a7835dmshba7fcc1d2d00919p132149jsnd4e6fcd6663e',
 		'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
 	}
 };
@@ -111,3 +114,13 @@ fetch(`https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=${id}&text_for
 
 	.catch(err => console.error(err));
 }
+
+artistOne.addEventListener("click", ()=>{
+	console.log("artist one was clicked")
+	responseCorrect.removeAttribute("class","hide")
+})
+
+randomChoice.addEventListener("click", ()=>{
+	console.log("random choice was clicked")
+	responseIncorrect.removeAttribute("class","hide")
+})
