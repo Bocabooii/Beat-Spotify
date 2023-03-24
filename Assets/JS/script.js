@@ -5,6 +5,8 @@ var startScreen = document.getElementById("start-screen");
 var easyQuiz = document.getElementById("easyQuiz");
 var responseCorrect = document.getElementById("responseCorrect");
 var responseInorrect = document.getElementById("responseIncorrect");
+var dataSet = [];
+var checkAnswer = "";
 
 const options = {
 	method: 'GET',
@@ -39,7 +41,7 @@ fetch('https://spotify23.p.rapidapi.com/search/?q=popular&type=tracks&offset=0&l
 
 // random items function
 function random_item(items) {
-  return items[Math.floor(Math.random()*items.length)];  
+  return items[Math.floor(Math.random()*items.length)];
 }
 
 // allows for multiple actions to happen on one click
@@ -62,31 +64,49 @@ const optionsGenius = {
 
 // gets billboard top 100 playlist
 var getSongItems = function () {
-fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6NQ&offset=0&limit=10', options)
+fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6NQ&offset=0&limit=15', options)
 	.then(response => response.json())
 	.then(response => {
 		console.log(response.items) // logs all 10 songs fetched
-		
-		var trackName = response.items[0].track.name
+
+		response.items.forEach((songData,i) => {
+			if(i<3){
+				var rando =  Math.floor(Math.random()*response.items.length);
+				dataSet.push(
+				{
+					'album':response.items[rando].track.album.images[0].url,
+					'trackName':response.items[rando].track.name
+				})
+			}
+		});
+		console.log(dataSet);
+		var randomIndex = Math.floor(Math.random()*response.items.length);
+
+
+		var trackName = response.items[randomIndex].track.name
+		checkAnswer = trackName
 		console.log(trackName)
 
-		var artistName = response.items[0].track.artists[0].name
+		var artistName = response.items[randomIndex].track.artists[0].name
 		console.log(artistName)
 
-		// var trackIdSpotify = response.items[0].track.album.id
-		// console.log(trackIdSpotify)
-
 		// console.log(response.items[0].track.album.images[0].url) // logs the img url for the first song
-		var albumImg = response.items[0].track.album.images[0].url
+		var albumImg = response.items[randomIndex].track.album.images[0].url
 		artistOne.innerHTML = "<img src=" + albumImg + ">" // adds the img url to html formatting and displayed in page
 
 		// use to get the song ID from genius
 		fetch(`https://genius-song-lyrics1.p.rapidapi.com/search/?q=${trackName + artistName}&per_page=1&page=1`, optionsGenius)
 			.then(response => response.json())
-			.then(response => {
+			.then(response => { 
+				if(response.hits.length !== 0){
+					
 				console.log(response)
 				console.log(response.hits[0].result.id)
 				getLyrics(response.hits[0].result.id)
+			} else{
+				getSongItems()
+			}
+				
 			})
 			.catch(err => console.error(err));
 
@@ -106,11 +126,20 @@ var getLyrics = function (id) {
 fetch(`https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=${id}&text_format=plain`, optionsGenius)
 	.then(response => response.json())
 	.then(response => {
+		console.log(response)
 	var plainLyric =	response.lyrics.lyrics.body.plain // converts lyrics into plain text
 	const arrayLyric = plainLyric.split("[Chorus]") // splits at chorus
-	var lyricContent = arrayLyric[1].split("[")[0] // logs info after chorus in first array
+	console.log(arrayLyric)
+	var lyricContent;
+	if (arrayLyric.length > 1 ){
+		lyricContent = arrayLyric[1].split("[")[0]
+	} else {
+		lyricContent = arrayLyric[0]
+	}
+ 	// logs info after chorus in first array
 	lyricText.innerHTML = lyricContent
 	})
+	
 
 	.catch(err => console.error(err));
 }
