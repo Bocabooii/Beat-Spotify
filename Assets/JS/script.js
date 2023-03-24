@@ -117,10 +117,16 @@ fetch(`https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=${id}&text_for
 
 artistOne.addEventListener("click", ()=>{
 	console.log("artist one was clicked")
-	responseCorrect.removeAttribute("class","hide")
+	responseCorrect.removeAttribute("class","hide");
+	setTimeout(function(){
+		responseCorrect.setAttribute("class","hide");
+	},3000)
 })
 
 randomChoice.addEventListener("click", ()=>{
 	console.log("random choice was clicked")
 	responseIncorrect.removeAttribute("class","hide")
+	setTimeout(function(){
+		responseIncorrect.setAttribute("class","hide");
+	},3000)
 })
