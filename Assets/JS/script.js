@@ -168,6 +168,7 @@ fetch(`https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=${id}&text_for
 	.catch(err => console.error(err));
 }
 
+// correct answer
 artistOne.addEventListener("click", ()=>{
 	console.log("artist one was clicked")
 	responseCorrect.removeAttribute("class","hide");
@@ -176,6 +177,7 @@ artistOne.addEventListener("click", ()=>{
 	},3000)
 })
 
+// incorrect answer
 dataChoiceA.addEventListener("click", ()=>{
 	console.log("random choice was clicked")
 	console.log(valueDataItemA); // returns empty
