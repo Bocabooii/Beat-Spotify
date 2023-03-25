@@ -43,14 +43,18 @@
 
     </section>
 
-    <section id="easyQuiz" class="hide">
-        <div id="artistPhoto">
+    <section id="easyQuiz" class="hide level">
+        <div id="artistPhoto" class="level-item is-align-content-space-evenly">
             <button id="artistOne"></button>
-            <button id="randomChoice"></button>
+            <button id="dataChoiceA"></button>
+            <button id="dataChoiceB"></button>
+            <button id="dataChoiceC"></button>
         </div>
         <div id="randomLyric" class="container is-max-desktop has-text-centered">
             <p class="notification is-success"><span id="lyricText"></span></p>
         </div>
+
+        <!-- response mesages -->
         <div id="responseCorrect" class="hide">
             <p id="responseMessage">Correct!</p>
         </div>
@@ -58,6 +62,7 @@
             <p id="responseMessage">Incorrect!</p>
         </div>
     </section>
+
     <script src="./Assets/JS/script.js"></script>
 </body>
 </html>

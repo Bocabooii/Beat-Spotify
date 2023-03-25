@@ -66,11 +66,7 @@ body{
     box-shadow: 0 0 10px 2px;
 }
 
-#artistOne {
-  max-width: 200px;
-}
-
-#randomChoice {
+#artistOne, #dataChoiceA, #dataChoiceB, #dataChoiceC {
   max-width: 200px;
 }
 
