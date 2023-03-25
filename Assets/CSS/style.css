@@ -101,4 +101,8 @@ body{
   justify-content: center;
   align-items: center;
 }
-  
+
+.table {
+  color: white;
+  background-color: rgb(30 215 96);
+}
