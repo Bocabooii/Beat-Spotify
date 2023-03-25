@@ -1,10 +1,15 @@
 var startGame = document.getElementById("startGamebtn");
 var artistOne = document.getElementById("artistOne");
+var valueArtistOne = document.getElementById("artistOne").value;
+
 var randomChoice = document.getElementById("randomChoice");
 var startScreen = document.getElementById("start-screen");
 var easyQuiz = document.getElementById("easyQuiz");
 var responseCorrect = document.getElementById("responseCorrect");
 var responseInorrect = document.getElementById("responseIncorrect");
+var endScreen = document.getElementById("endScreen");
+
+var valueLyrics = document.getElementById("lyricText").value;
 
 var dataItemA = document.getElementById("dataChoiceA");
 var valueDataItemA = document.getElementById("dataChoiceA").value;
@@ -170,20 +175,61 @@ fetch(`https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=${id}&text_for
 
 // correct answer
 artistOne.addEventListener("click", ()=>{
-	console.log("artist one was clicked")
-	responseCorrect.removeAttribute("class","hide");
-	setTimeout(function(){
-		responseCorrect.setAttribute("class","hide");
-	},3000)
+	if (valueArtistOne == valueLyrics) {
+		console.log("artist one was clicked")
+		responseCorrect.removeAttribute("class","hide");
+		setTimeout(function(){
+			responseCorrect.setAttribute("class","hide");
+		},3000)
+	} else {
+		responseIncorrect.removeAttribute("class","hide")
+		setTimeout(function(){
+		responseIncorrect.setAttribute("class","hide");
+		},3000)
+		console.log(valueArtistOne)
+		console.log(valueLyrics)
+		// quizEnd()
+	}
 })
 
 // incorrect answer
 dataChoiceA.addEventListener("click", ()=>{
 	console.log("random choice was clicked")
-	console.log(valueDataItemA); // returns empty
-	console.log(typeof valueDataItemA) // value returns string
-	responseIncorrect.removeAttribute("class","hide")
-	setTimeout(function(){
+	if (valueDataItemA == valueLyrics) {
+		responseCorrect.removeAttribute("class","hide");
+		setTimeout(function(){
+			responseCorrect.setAttribute("class","hide");
+		},3000)
+	} else {
+		responseIncorrect.removeAttribute("class","hide")
+		setTimeout(function(){
 		responseIncorrect.setAttribute("class","hide");
-	},3000)
+		},3000)
+		quizEnd()
+	}
 })
+
+function quizEnd() {
+	easyQuiz.setAttribute("class","hide")
+	endScreen.removeAttribute("class","hide")
+}
+
+// submitBtn.onclick = savehighscore()
+function savehighscore() {
+	var initials = initialsEl.value.trim(); // variable for initials
+
+	// gets highscore array and adds new data to highscore array if initals are present
+	if (initials !== "") {
+		var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
+		var newScore = {
+		score: time,
+		initials: initials
+		};
+
+		// adds highscores to string and adds them to score.html from local storage
+		highscores.push(newScore);
+		window.localStorage.setItem("highscores", JSON.stringify(highscores));
+
+		window.location.href = "highscores.html";
+	}
+}

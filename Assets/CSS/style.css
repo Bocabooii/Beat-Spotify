@@ -70,6 +70,16 @@ body{
   max-width: 200px;
 }
 
+#easyQuiz {
+  padding-top: 100px;
+}
+
+#Name {
+  background-color: rgb(30 215 96);
+  color: white;
+  font-size: large;
+}
+
 .hide {
   display: none;
 }
