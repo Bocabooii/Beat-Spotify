@@ -216,14 +216,14 @@ function quizEnd() {
 
 // submitBtn.onclick = savehighscore()
 function savehighscore() {
-	var initials = initialsEl.value.trim(); // variable for initials
+	var name = nameEl.value.trim(); // variable for initials
 
 	// gets highscore array and adds new data to highscore array if initals are present
-	if (initials !== "") {
+	if (name !== "") {
 		var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
 		var newScore = {
 		score: time,
-		initials: initials
+		name: name
 		};
 
 		// adds highscores to string and adds them to score.html from local storage
