@@ -1,9 +1,23 @@
 var startGame = document.getElementById("startGamebtn");
 var artistOne = document.getElementById("artistOne");
+
+var randomChoice = document.getElementById("randomChoice");
 var startScreen = document.getElementById("start-screen");
 var easyQuiz = document.getElementById("easyQuiz");
+var responseCorrect = document.getElementById("responseCorrect");
+var responseInorrect = document.getElementById("responseIncorrect");
+var endScreen = document.getElementById("endScreen");
+
+var dataItemA = document.getElementById("dataChoiceA");
+var dataItemB = document.getElementById("dataChoiceB");
+var dataItemC = document.getElementById("dataChoiceC");
+
+var submitBtn = document.querySelector("#submitBtn");
+var nameEl = document.querySelector("#Name");
+
 var dataSet = [];
 var checkAnswer = "";
+
 const options = {
 	method: 'GET',
 	headers: {
@@ -12,29 +26,6 @@ const options = {
 	}
 };
 
-// "popular" search 
-var getPopularMusic = function() {
-fetch('https://spotify23.p.rapidapi.com/search/?q=popular&type=tracks&offset=0&limit=10&numberOfTopResults=5', options)
-    .then(response => response.json())
-    .then(response => {
-		console.log(response.tracks.items)
-		var randomTrack = random_item(response.tracks.items);
-		var trackId = randomTrack.data.id;
-		console.log(trackId);
-		console.log(randomTrack);
-		getMusicById(trackId);
-	})
-    .catch(err => console.error(err));
-}
-
-// Unsure if we need/purpose?
-// var getMusicById = function(id) {
-// 	fetch(`https://spotify23.p.rapidapi.com/tracks/?ids=${id}`, options)
-// 	.then(response => response.json())
-// 	.then(response => console.log(response))
-// 	.catch(err => console.error(err));
-// }
-
 // random items function
 function random_item(items) {
   return items[Math.floor(Math.random()*items.length)];
@@ -42,8 +33,6 @@ function random_item(items) {
 
 // allows for multiple actions to happen on one click
 startGame.addEventListener("click", ()=>{
-	console.log("start button works")
-	// getPopularMusic();
 	getSongItems();
 	startScreen.setAttribute("class","hide");
 	easyQuiz.removeAttribute("class","hide");
@@ -58,14 +47,16 @@ const optionsGenius = {
 	}
 };
 
+var trackName;
+
 // gets billboard top 100 playlist
 var getSongItems = function () {
 fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6NQ&offset=0&limit=15', options)
 	.then(response => response.json())
 	.then(response => {
-		console.log(response.items) // logs all 10 songs fetched
+		console.log(response.items) // logs all songs fetched
 
-		response.items.forEach((songData,i) => {
+		response.items.forEach((i) => {
 			if(i<3){
 				var rando =  Math.floor(Math.random()*response.items.length);
 				dataSet.push(
@@ -73,22 +64,43 @@ fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6
 					'album':response.items[rando].track.album.images[0].url,
 					'trackName':response.items[rando].track.name
 				})
+				
 			}
 		});
+
+		// Creates 3 other random images
 		console.log(dataSet);
+		var dataItemA = dataSet[0].album
+		dataChoiceA.innerHTML = "<img src="+dataItemA+">"
+		var dataItemTrackA = dataSet[0].trackName
+		dataChoiceA.setAttribute("value", dataItemTrackA)
+		
+		var dataItemB = dataSet[1].album
+		dataChoiceB.innerHTML = "<img src="+dataItemB+">"
+		var dataItemTrackB = dataSet[1].trackName
+		dataChoiceB.setAttribute("value", dataItemTrackB)
+
+		var dataItemC = dataSet[2].album
+		dataChoiceC.innerHTML = "<img src="+dataItemC+">"
+		var dataItemTrackC = dataSet[2].trackName
+		dataChoiceC.setAttribute("value", dataItemTrackC)
+
+		// gets random length for answer song
 		var randomIndex = Math.floor(Math.random()*response.items.length);
 
-
-		var trackName = response.items[randomIndex].track.name
+		// grabs track name for genius
+		trackName = response.items[randomIndex].track.name
 		checkAnswer = trackName
 		console.log(trackName)
 
+		// gets artists name for genius search
 		var artistName = response.items[randomIndex].track.artists[0].name
 		console.log(artistName)
 
 		// console.log(response.items[0].track.album.images[0].url) // logs the img url for the first song
 		var albumImg = response.items[randomIndex].track.album.images[0].url
 		artistOne.innerHTML = "<img src=" + albumImg + ">" // adds the img url to html formatting and displayed in page
+		artistOne.setAttribute("value",trackName)
 
 		// use to get the song ID from genius
 		fetch(`https://genius-song-lyrics1.p.rapidapi.com/search/?q=${trackName + artistName}&per_page=1&page=1`, optionsGenius)
@@ -97,7 +109,7 @@ fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6
 				if(response.hits.length !== 0){
 					
 				console.log(response)
-				console.log(response.hits[0].result.id)
+				// console.log(response.hits[0].result.id)
 				getLyrics(response.hits[0].result.id)
 			} else{
 				getSongItems()
@@ -105,12 +117,6 @@ fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6
 				
 			})
 			.catch(err => console.error(err));
-
-		// getting other album images for choices
-		var randomItem = random_item(response.items)
-		var randomOption = randomItem.track.album.images[0].url
-		console.log(randomOption)
-		randomChoice.innerHTML = "<img src="+randomOption+">"
 
 	})
 
@@ -134,8 +140,124 @@ fetch(`https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=${id}&text_for
 	}
  	// logs info after chorus in first array
 	lyricText.innerHTML = lyricContent
+	lyricText.setAttribute("value",trackName)
 	})
 	
 
 	.catch(err => console.error(err));
+}
+
+var score = 0;
+
+function add1() {
+	console.log("Adding +1 to your score!");
+    score = score + 1;
+	console.log(score)
+}
+
+artistOne.addEventListener("click", ()=>{
+	var valueArtistOne = document.getElementById("artistOne").value; // success
+	var valueLyrics = document.getElementById("lyricText").value; // undefined
+
+	if (valueArtistOne == valueLyrics) {
+		responseCorrect.removeAttribute("class","hide");
+		setTimeout(function(){
+			responseCorrect.setAttribute("class","hide");
+		},3000)
+		add1();
+		getSongItems();
+		getLyrics();
+	} else {
+		responseIncorrect.removeAttribute("class","hide")
+		setTimeout(function(){
+		responseIncorrect.setAttribute("class","hide");
+		},3000)
+		quizEnd()
+	}
+})
+
+dataChoiceA.addEventListener("click", ()=>{
+	var valueDataItemA = document.getElementById("dataChoiceA").value; // success
+	var valueLyrics = document.getElementById("lyricText").value; // undefined
+
+	if (valueDataItemA == valueLyrics) {
+		responseCorrect.removeAttribute("class","hide");
+		setTimeout(function(){
+			responseCorrect.setAttribute("class","hide");
+		},3000)
+		add1();
+	} else {
+		responseIncorrect.removeAttribute("class","hide")
+		setTimeout(function(){
+		responseIncorrect.setAttribute("class","hide");
+		},3000)
+		quizEnd()
+	}
+})
+
+dataChoiceB.addEventListener("click", ()=>{
+	var valueDataItemB = document.getElementById("dataChoiceB").value; // success
+	var valueLyrics = document.getElementById("lyricText").value; // undefined
+
+	if (valueDataItemB == valueLyrics) {
+		responseCorrect.removeAttribute("class","hide");
+		setTimeout(function(){
+			responseCorrect.setAttribute("class","hide");
+		},3000)
+		add1();
+	} else {
+		responseIncorrect.removeAttribute("class","hide")
+		setTimeout(function(){
+		responseIncorrect.setAttribute("class","hide");
+		},3000)
+		quizEnd()
+	}
+})
+
+dataChoiceC.addEventListener("click", ()=>{
+	var valueDataItemC = document.getElementById("dataChoiceC").value; // success
+	var valueLyrics = document.getElementById("lyricText").value; // undefined
+
+	if (valueDataItemC == valueLyrics) {
+		responseCorrect.removeAttribute("class","hide");
+		setTimeout(function(){
+			responseCorrect.setAttribute("class","hide");
+		},3000)
+		add1();
+	} else {
+		responseIncorrect.removeAttribute("class","hide")
+		setTimeout(function(){
+		responseIncorrect.setAttribute("class","hide");
+		},3000)
+		quizEnd()
+	}
+})
+
+// end screen load
+function quizEnd() {
+	easyQuiz.setAttribute("class","hide")
+	endScreen.removeAttribute("class","hide")
+}
+
+submitBtn.addEventListener("click", () => {
+	savehighscore()
+}) 
+
+function savehighscore() {
+	var name = nameEl.value; // variable for initials
+
+	// gets highscore array and adds new data to highscore array if initals are present
+	if (name !== "") {
+		var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
+		var newScore = {
+		score: score,
+		name: name
+		};
+
+		// adds highscores to string and adds them to score.html from local storage
+		highscores.push(newScore);
+		window.localStorage.setItem("highscores", JSON.stringify(highscores));
+
+		window.location.href = "highscores.html";
+	}
 }

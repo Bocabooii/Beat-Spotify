@@ -66,12 +66,18 @@ body{
     box-shadow: 0 0 10px 2px;
 }
 
-#artistOne {
+#artistOne, #dataChoiceA, #dataChoiceB, #dataChoiceC {
   max-width: 200px;
 }
 
-#randomChoice {
-  max-width: 200px;
+#easyQuiz {
+  padding-top: 100px;
+}
+
+#NameTitle {
+  background-color: rgb(30 215 96);
+  color: white;
+  font-size: large;
 }
 
 .hide {
@@ -105,4 +111,8 @@ body{
   justify-content: center;
   align-items: center;
 }
-  
+
+.table {
+  color: white;
+  background-color: rgb(30 215 96);
+}
