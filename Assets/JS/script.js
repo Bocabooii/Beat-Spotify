@@ -1,6 +1,5 @@
 var startGame = document.getElementById("startGamebtn");
 var artistOne = document.getElementById("artistOne");
-var valueArtistOne = document.getElementById("artistOne").value;
 
 var randomChoice = document.getElementById("randomChoice");
 var startScreen = document.getElementById("start-screen");
@@ -9,12 +8,12 @@ var responseCorrect = document.getElementById("responseCorrect");
 var responseInorrect = document.getElementById("responseIncorrect");
 var endScreen = document.getElementById("endScreen");
 
-var valueLyrics = document.getElementById("lyricText").value;
-
 var dataItemA = document.getElementById("dataChoiceA");
-var valueDataItemA = document.getElementById("dataChoiceA").value;
 var dataItemB = document.getElementById("dataChoiceB");
 var dataItemC = document.getElementById("dataChoiceC");
+
+var submitBtn = document.querySelector("#submitBtn");
+var nameEl = document.querySelector("#Name");
 
 var dataSet = [];
 var checkAnswer = "";
@@ -27,29 +26,6 @@ const options = {
 	}
 };
 
-// "popular" search 
-// var getPopularMusic = function() {
-// fetch('https://spotify23.p.rapidapi.com/search/?q=popular&type=tracks&offset=0&limit=10&numberOfTopResults=5', options)
-//     .then(response => response.json())
-//     .then(response => {
-// 		console.log(response.tracks.items)
-// 		var randomTrack = random_item(response.tracks.items);
-// 		var trackId = randomTrack.data.id;
-// 		console.log(trackId);
-// 		console.log(randomTrack);
-// 		getMusicById(trackId);
-// 	})
-//     .catch(err => console.error(err));
-// }
-
-// Unsure if we need/purpose?
-// var getMusicById = function(id) {
-// 	fetch(`https://spotify23.p.rapidapi.com/tracks/?ids=${id}`, options)
-// 	.then(response => response.json())
-// 	.then(response => console.log(response))
-// 	.catch(err => console.error(err));
-// }
-
 // random items function
 function random_item(items) {
   return items[Math.floor(Math.random()*items.length)];
@@ -57,8 +33,6 @@ function random_item(items) {
 
 // allows for multiple actions to happen on one click
 startGame.addEventListener("click", ()=>{
-	// console.log("start button works")
-	// getPopularMusic();
 	getSongItems();
 	startScreen.setAttribute("class","hide");
 	easyQuiz.removeAttribute("class","hide");
@@ -82,7 +56,7 @@ fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6
 	.then(response => {
 		console.log(response.items) // logs all songs fetched
 
-		response.items.forEach((songData,i) => {
+		response.items.forEach((i) => {
 			if(i<3){
 				var rando =  Math.floor(Math.random()*response.items.length);
 				dataSet.push(
@@ -173,33 +147,26 @@ fetch(`https://genius-song-lyrics1.p.rapidapi.com/song/lyrics/?id=${id}&text_for
 	.catch(err => console.error(err));
 }
 
-// correct answer
-artistOne.addEventListener("click", ()=>{
-	if (valueArtistOne == valueLyrics) {
-		console.log("artist one was clicked")
-		responseCorrect.removeAttribute("class","hide");
-		setTimeout(function(){
-			responseCorrect.setAttribute("class","hide");
-		},3000)
-	} else {
-		responseIncorrect.removeAttribute("class","hide")
-		setTimeout(function(){
-		responseIncorrect.setAttribute("class","hide");
-		},3000)
-		console.log(valueArtistOne)
-		console.log(valueLyrics)
-		// quizEnd()
-	}
-})
+var score = 0;
 
-// incorrect answer
-dataChoiceA.addEventListener("click", ()=>{
-	console.log("random choice was clicked")
-	if (valueDataItemA == valueLyrics) {
+function add1() {
+	console.log("Adding +1 to your score!");
+    score = score + 1;
+	console.log(score)
+}
+
+artistOne.addEventListener("click", ()=>{
+	var valueArtistOne = document.getElementById("artistOne").value; // success
+	var valueLyrics = document.getElementById("lyricText").value; // undefined
+
+	if (valueArtistOne == valueLyrics) {
 		responseCorrect.removeAttribute("class","hide");
 		setTimeout(function(){
 			responseCorrect.setAttribute("class","hide");
 		},3000)
+		add1();
+		getSongItems();
+		getLyrics();
 	} else {
 		responseIncorrect.removeAttribute("class","hide")
 		setTimeout(function(){
@@ -209,20 +176,81 @@ dataChoiceA.addEventListener("click", ()=>{
 	}
 })
 
+dataChoiceA.addEventListener("click", ()=>{
+	var valueDataItemA = document.getElementById("dataChoiceA").value; // success
+	var valueLyrics = document.getElementById("lyricText").value; // undefined
+
+	if (valueDataItemA == valueLyrics) {
+		responseCorrect.removeAttribute("class","hide");
+		setTimeout(function(){
+			responseCorrect.setAttribute("class","hide");
+		},3000)
+		add1();
+	} else {
+		responseIncorrect.removeAttribute("class","hide")
+		setTimeout(function(){
+		responseIncorrect.setAttribute("class","hide");
+		},3000)
+		quizEnd()
+	}
+})
+
+dataChoiceB.addEventListener("click", ()=>{
+	var valueDataItemB = document.getElementById("dataChoiceB").value; // success
+	var valueLyrics = document.getElementById("lyricText").value; // undefined
+
+	if (valueDataItemB == valueLyrics) {
+		responseCorrect.removeAttribute("class","hide");
+		setTimeout(function(){
+			responseCorrect.setAttribute("class","hide");
+		},3000)
+		add1();
+	} else {
+		responseIncorrect.removeAttribute("class","hide")
+		setTimeout(function(){
+		responseIncorrect.setAttribute("class","hide");
+		},3000)
+		quizEnd()
+	}
+})
+
+dataChoiceC.addEventListener("click", ()=>{
+	var valueDataItemC = document.getElementById("dataChoiceC").value; // success
+	var valueLyrics = document.getElementById("lyricText").value; // undefined
+
+	if (valueDataItemC == valueLyrics) {
+		responseCorrect.removeAttribute("class","hide");
+		setTimeout(function(){
+			responseCorrect.setAttribute("class","hide");
+		},3000)
+		add1();
+	} else {
+		responseIncorrect.removeAttribute("class","hide")
+		setTimeout(function(){
+		responseIncorrect.setAttribute("class","hide");
+		},3000)
+		quizEnd()
+	}
+})
+
+// end screen load
 function quizEnd() {
 	easyQuiz.setAttribute("class","hide")
 	endScreen.removeAttribute("class","hide")
 }
 
-// submitBtn.onclick = savehighscore()
+submitBtn.addEventListener("click", () => {
+	savehighscore()
+}) 
+
 function savehighscore() {
-	var name = nameEl.value.trim(); // variable for initials
+	var name = nameEl.value; // variable for initials
 
 	// gets highscore array and adds new data to highscore array if initals are present
 	if (name !== "") {
 		var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
 		var newScore = {
-		score: time,
+		score: score,
 		name: name
 		};
 
