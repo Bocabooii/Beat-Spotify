@@ -27,4 +27,5 @@ Our group used the following technologies to complete this project:
 
 ## Link to Deployed Application
 
+https://bocabooii.github.io/Beat-Spotify/
 ---
