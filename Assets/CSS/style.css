@@ -112,7 +112,20 @@ body{
   align-items: center;
 }
 
-.table {
+.highscores {
   color: white;
   background-color: rgb(30 215 96);
+  padding: 25px;
+  border-radius: 5px;
+}
+
+.highscoresH1 {
+  font-size: 30px;
+  text-decoration: underline;
+  text-align: center;
+}
+
+#highscores {
+  padding: 20px;
+  font-size: 20px;
 }
