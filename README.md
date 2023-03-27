@@ -21,6 +21,9 @@ Our group used the following technologies to complete this project:
     * We used Spotify's API documentation to make sure we were using their product correctly and to make sure we complied with Spotify's developer policy.
 
 ## Screenshot of Deployment
+<img src="./Assets/Screenshots/Screenshot 2023-03-27 at 2.09.07 PM.png" style="max-width: 700px">
+<img src="./Assets/Screenshots/Screenshot 2023-03-27 at 2.09.38 PM.png" style="max-width: 700px">
+<img src="./Assets/Screenshots/Screenshot 2023-03-27 at 2.10.03 PM.png" style="max-width: 700px">
 
 ## Link to Deployed Application
 
