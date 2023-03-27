@@ -21,7 +21,7 @@ var checkAnswer = "";
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '3260a7835dmshba7fcc1d2d00919p132149jsnd4e6fcd6663e',
+		'X-RapidAPI-Key': 'f53e094e6emsh648e1d2d2398731p1dd025jsne789b8d06fb9',
 		'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
 	}
 };
@@ -56,7 +56,7 @@ fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6
 	.then(response => {
 		console.log(response.items) // logs all songs fetched
 
-		response.items.forEach((i) => {
+		response.items.forEach((songData,i) => {
 			if(i<3){
 				var rando =  Math.floor(Math.random()*response.items.length);
 				dataSet.push(
