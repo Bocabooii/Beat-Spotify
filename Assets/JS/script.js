@@ -192,6 +192,8 @@ dataChoiceA.addEventListener("click", ()=>{
 			responseCorrect.setAttribute("class","hide");
 		},3000)
 		add1();
+		getSongItems();
+		getLyrics();
 	} else {
 		responseIncorrect.removeAttribute("class","hide")
 		setTimeout(function(){
@@ -211,6 +213,8 @@ dataChoiceB.addEventListener("click", ()=>{
 			responseCorrect.setAttribute("class","hide");
 		},3000)
 		add1();
+		getSongItems();
+		getLyrics();
 	} else {
 		responseIncorrect.removeAttribute("class","hide")
 		setTimeout(function(){
@@ -230,6 +234,8 @@ dataChoiceC.addEventListener("click", ()=>{
 			responseCorrect.setAttribute("class","hide");
 		},3000)
 		add1();
+		getSongItems();
+		getLyrics();
 	} else {
 		responseIncorrect.removeAttribute("class","hide")
 		setTimeout(function(){
