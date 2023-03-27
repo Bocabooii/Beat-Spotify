@@ -51,7 +51,7 @@ var trackName;
 
 // gets billboard top 100 playlist
 var getSongItems = function () {
-fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6NQ&offset=0&limit=15', options)
+fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6NQ&offset=0&limit=20', options)
 	.then(response => response.json())
 	.then(response => {
 		console.log(response.items) // logs all songs fetched
