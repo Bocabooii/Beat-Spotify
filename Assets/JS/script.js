@@ -42,7 +42,7 @@ startGame.addEventListener("click", ()=>{
 const optionsGenius = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '2d1ed2a192msh98939cb7c479eaap1118bajsn8c8e3a534674',
+		'X-RapidAPI-Key': 'f53e094e6emsh648e1d2d2398731p1dd025jsne789b8d06fb9',
 		'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
 	}
 };
@@ -57,32 +57,38 @@ fetch('https://spotify23.p.rapidapi.com/playlist_tracks/?id=6UeSakyzhiEt4NB3UAd6
 		console.log(response.items) // logs all songs fetched
 
 		response.items.forEach((songData,i) => {
+			var rando =  Math.floor(Math.random()*response.items.length);
 			if(i<3){
-				var rando =  Math.floor(Math.random()*response.items.length);
 				dataSet.push(
 				{
 					'album':response.items[rando].track.album.images[0].url,
 					'trackName':response.items[rando].track.name
 				})
-				
 			}
 		});
 
+		var randoOne =  Math.floor(Math.random()*dataSet.length);
+		console.log(randoOne)
+		var randoTwo =  Math.floor(Math.random()*dataSet.length);
+		console.log(randoTwo)
+		var randoThree =  Math.floor(Math.random()*dataSet.length);
+		console.log(randoThree)
+
 		// Creates 3 other random images
 		console.log(dataSet);
-		var dataItemA = dataSet[0].album
+		var dataItemA = dataSet[randoOne].album
 		dataChoiceA.innerHTML = "<img src="+dataItemA+">"
-		var dataItemTrackA = dataSet[0].trackName
+		var dataItemTrackA = dataSet[randoOne].trackName
 		dataChoiceA.setAttribute("value", dataItemTrackA)
 		
-		var dataItemB = dataSet[1].album
+		var dataItemB = dataSet[randoTwo].album
 		dataChoiceB.innerHTML = "<img src="+dataItemB+">"
-		var dataItemTrackB = dataSet[1].trackName
+		var dataItemTrackB = dataSet[randoTwo].trackName
 		dataChoiceB.setAttribute("value", dataItemTrackB)
 
-		var dataItemC = dataSet[2].album
+		var dataItemC = dataSet[randoThree].album
 		dataChoiceC.innerHTML = "<img src="+dataItemC+">"
-		var dataItemTrackC = dataSet[2].trackName
+		var dataItemTrackC = dataSet[randoThree].trackName
 		dataChoiceC.setAttribute("value", dataItemTrackC)
 
 		// gets random length for answer song
