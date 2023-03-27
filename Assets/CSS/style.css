@@ -2,6 +2,7 @@
     box-sizing: border-box;
     font-family: Gotham Rounded;
   }
+  
 
 body{
     /* --hue: var(--hue-neutral); */
@@ -128,4 +129,16 @@ body{
 #highscores {
   padding: 20px;
   font-size: 20px;
+}
+
+#lyricText {
+  background-color: rgb(30 215 96);
+}
+
+#artistOne:hover,#dataChoiceA:hover,#dataChoiceB:hover,#dataChoiceC:hover{
+  background-color:rgb(30 215 96)
+}
+
+#dataOptions {
+  border-radius: 10px;
 }

@@ -11,7 +11,7 @@
 
 <body class="has-background-grey-dark">
     <!-- Heading for two links: github/highscores -->
-    <a id="github" href="#" class="button">Github Link</a>
+    <a id="github" href="https://github.com/Bocabooii/Beat-Spotify" target="_blank" class="button">Github Link</a>
     <a id="scores" href="highscores.html" class="button">View Highscores</a>
 
     <!-- start screen info -->
@@ -20,7 +20,8 @@
         <!-- title and rules -->
         <h1 id="gameTitle" class="level-item has-text-centered title is-1">Beat Spotify</h1>
             <div id="firstScreen" class="columns">
-                <ul class="level-item has-text-centered column">Rules
+                <ul class="level-item has-text-centered column">
+                    <li><br><h2 class="is-size-3">Rules</h2></li>
                     <li class="column">Rule 1<br><p>There will be a phrase from a random top 100 song lyric. Guess the artist who sang that lyric!</p></li>
                     <li class="column">Rule 2<br><p>There will be photos of artist displayed when and ONLY one is correct, if you have trouble click a hint</p></li>
                     <li class="column">Rule 3<br><p>If you reach a complete score of 10/10, you complete the level!</p></li>
@@ -45,13 +46,17 @@
 
     <section id="easyQuiz" class="hide level">
         <div id="artistPhoto" class="level-item is-align-content-space-evenly">
-            <button id="artistOne"></button>
-            <button id="dataChoiceA"></button>
-            <button id="dataChoiceB"></button>
-            <button id="dataChoiceC"></button>
+            <div id="topRow" class="is-flex is-flex-direction-column">
+                <button id="artistOne" id="dataOptions" class="mr-4 mt-4"></button>
+                <button id="dataChoiceA" id="dataOptions" class="mr-4 mt-4"></button>
+            </div>
+            <div id="bottomRow" class="is-flex is-flex-direction-column">
+                <button id="dataChoiceB" id="dataOptions" class="mr-4 mt-4"></button>
+                <button id="dataChoiceC" id="dataOptions" class="mr-4 mt-4"></button>
+            </div>
         </div>
         <div id="randomLyric" class="container is-max-desktop has-text-centered">
-            <button id="lyricText" class="notification is-success"></button>
+            <button id="lyricText" class="notification is-success mt-6"></button>
         </div>
 
         <!-- response mesages -->
