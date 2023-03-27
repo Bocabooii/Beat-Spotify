@@ -64,32 +64,68 @@ body{
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 0 10px 2px;
-  }
+}
+
+#artistOne, #dataChoiceA, #dataChoiceB, #dataChoiceC {
+  max-width: 200px;
+}
+
+#easyQuiz {
+  padding-top: 100px;
+}
+
+#NameTitle {
+  background-color: rgb(30 215 96);
+  color: white;
+  font-size: large;
+}
+
+.hide {
+  display: none;
+}
+
 .btn-grid {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 10px;
-    margin: 20px 0;
-  }
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px;
+  margin: 20px 0;
+}
   
-  .btn {
-    /* --hue: var(--hue-neutral); */
-    border: 1px solid hsl(var(--hue), 100%, 30%);
-    border-color: black;
-    background-color:rgb(30 215 96);
-    border-radius: 5px;
-    padding: 5px 10px;
-    color:white;
-    outline: none;
-  }
-  .next-btn {
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 10px 20px;
-  }
-  .controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+.btn {
+  /* --hue: var(--hue-neutral); */
+  border: 1px solid hsl(var(--hue), 100%, 30%);
+  border-color: black;
+  background-color:rgb(30 215 96);
+  border-radius: 5px;
+  padding: 5px 10px;
+  color:white;
+  outline: none;
+}
+.next-btn {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px 20px;
+}
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.highscores {
+  color: white;
+  background-color: rgb(30 215 96);
+  padding: 25px;
+  border-radius: 5px;
+}
+
+.highscoresH1 {
+  font-size: 30px;
+  text-decoration: underline;
+  text-align: center;
+}
+
+#highscores {
+  padding: 20px;
+  font-size: 20px;
+}
